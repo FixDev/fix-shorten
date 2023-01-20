@@ -27,3 +27,5 @@ Don't Forget to Import File To Postman.
 
 [Postman Collection](https://github.com/FixDev/fix-shorten/blob/short-url.postman_collection.json)
 
+# MVC
+Project ini menggunakan konsep MVC, akan tetapi berhubung implementasinya berbentuk API maka view nya dipisahkan ke dalam project yang berbeda.
