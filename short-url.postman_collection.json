@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "527ab339-fb40-44be-9a90-eaae99f4ed89",
+		"name": "short-url",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10617974"
+	},
+	"item": [
+		{
+			"name": "POST SHORT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"origUrl\": \"https://github.com/fixdev\",\r\n    \"useCustomUrl\": false,\r\n    \"howMuch\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fix-shorten-production.up.railway.app/api/short",
+					"protocol": "https",
+					"host": [
+						"fix-shorten-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"api",
+						"short"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
