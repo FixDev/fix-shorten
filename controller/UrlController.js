@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 import Url from '../models/Url.js';
 import validateUrl from '../utils/utils.js';
 import dotenv from 'dotenv';
@@ -7,6 +7,7 @@ dotenv.config();
 class CustomShortUrlDigit {
   // Decorator
   base = process.env.BASE;
+  allChar = '1234567890abcdefghijklmnopqrstuvwxy_';
   constructor(useCustomUrl, howMuch) {
     this.useCustomUrl = useCustomUrl;
     this.howMuch = howMuch;
@@ -14,7 +15,7 @@ class CustomShortUrlDigit {
 
   generateCustomeUrl = () => {
     const length = this.useCustomUrl ? this.howMuch : 21;
-    return `${this.base}/${nanoid(length)}`;
+    return `${this.base}/${customAlphabet(this.allChar, length)}`;
   };
 }
 
