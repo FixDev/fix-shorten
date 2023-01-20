@@ -2,7 +2,12 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import routes from './routes/index.js';
+import os from 'os';
+
+let networkInterfaces = os.networkInterfaces();
+
 dotenv.config();
+console.log(networkInterfaces);
 
 const app = express();
 
