@@ -7,7 +7,7 @@ dotenv.config();
 class CustomShortUrlDigit {
   // Decorator
   base = process.env.BASE;
-  constructor(useCustomUrl, howMuch) {
+  constructor(useCustomUrl, howMuch, customUrl) {
     this.useCustomUrl = useCustomUrl;
     this.howMuch = howMuch;
     this.customUrl = customUrl;
