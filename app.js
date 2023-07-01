@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import routes from './routes/index.js';
 import os from 'os';
+import cors from 'cors'
 
 let networkInterfaces = os.networkInterfaces();
 
@@ -12,6 +13,8 @@ console.log(networkInterfaces);
 const app = express();
 
 connectDB();
+
+app.use(cors())
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
