@@ -7,5 +7,6 @@ router.get('/', (req, res) => {
 });
 router.get('/:urlId', UrlContoller.index);
 router.post('/api/short', UrlContoller.short);
+router.post('/api/short-custom', UrlContoller.shortWithCustomUrl);
 
 export default router;

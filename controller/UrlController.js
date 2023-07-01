@@ -10,11 +10,15 @@ class CustomShortUrlDigit {
   constructor(useCustomUrl, howMuch) {
     this.useCustomUrl = useCustomUrl;
     this.howMuch = howMuch;
+    this.customUrl = customUrl;
   }
 
-  generateCustomeUrl = () => {
-    const length = this.useCustomUrl ? this.howMuch : 21;
-    return `${this.base}/${nanoid(length)}`;
+  generateCustomeUrl = (isRandom = true) => {
+    if (isRandom) {
+      const length = this.useCustomUrl ? this.howMuch : 21;
+      return `${this.base}/${nanoid(length)}`;
+    }
+    return `${this.base}/${this.customUrl}`;
   };
 }
 
@@ -51,8 +55,50 @@ class ShortUrl {
         if (url) {
           res.json(url);
         } else {
-          const CustomUrl = new CustomShortUrlDigit(useCustomUrl, howMuch);
+          const CustomUrl = new CustomShortUrlDigit(useCustomUrl, howMuch, '');
           const shortUrl = CustomUrl.generateCustomeUrl(); // implementasi decorator
+          const urlId = shortUrl.split('/')[3];
+          console.log(shortUrl);
+          console.log(urlId);
+          url = new Url({
+            origUrl,
+            shortUrl,
+            urlId,
+            date: new Date(),
+          });
+
+          await url.save();
+          res.json(url);
+        }
+      } catch (err) {
+        console.log(err);
+        res.status(500).json('Server Error');
+      }
+    } else {
+      res.status(400).json('Invalid Original Url');
+    }
+  };
+  shortWithCustomUrl = async (req, res) => {
+    const { origUrl, useCustomUrl, customUrl } = req.body;
+
+    const howMuch = customUrl.length;
+
+    if (howMuch >= 21) {
+      res.status(400).json('Url kustom terlalu panjang');
+    }
+
+    if (validateUrl(origUrl)) {
+      try {
+        let url = await Url.findOne({ origUrl });
+        if (url) {
+          res.json(url);
+        } else {
+          const CustomUrl = new CustomShortUrlDigit(
+            useCustomUrl,
+            howMuch,
+            customUrl
+          );
+          const shortUrl = CustomUrl.generateCustomeUrl(false); // implementasi decorator
           const urlId = shortUrl.split('/')[3];
           console.log(shortUrl);
           console.log(urlId);
